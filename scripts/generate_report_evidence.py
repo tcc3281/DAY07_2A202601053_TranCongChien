@@ -1,10 +1,14 @@
 import sys
 import os
+from dotenv import load_dotenv
+
+# Load variables from .env file
+load_dotenv()
 
 # Ensure src can be imported
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from src.embeddings import LocalEmbedder, MockEmbedder
+from src.embeddings import OpenAIEmbedder, MockEmbedder
 from src.chunking import compute_similarity
 from src.store import EmbeddingStore
 from src.agent import KnowledgeBaseAgent
@@ -16,18 +20,30 @@ def evaluate_part_4():
     print("PHẦN 4: DỰ ĐOÁN ĐỘ TƯƠNG TỰ (SIMILARITY PREDICTIONS)")
     print("="*50)
     pairs = [
-        ("Mèo là động vật dễ thương", "Con mèo này rất đáng yêu", "cao"),
-        ("Tôi đi học bằng xe đạp", "Trời hôm nay rất đẹp", "thấp"),
-        ("Trí tuệ nhân tạo phát triển mạnh", "AI đang thay đổi thế giới", "cao"),
-        ("Anh ấy thích uống cà phê đen", "Cà phê sữa là món tôi thích", "cao"),
-        ("Bầu trời màu xanh dương", "Cỏ cây có màu xanh lá", "thấp")
+        # --- Cặp tương tự cao (gần như paraphrase, dùng chung từ vựng lõi) ---
+        ("Con mèo nhà em rất dễ thương và đáng yêu, nó thường cuộn tròn ngủ trên ghế sofa",
+         "Chú mèo trắng này trông thật dễ thương và đáng yêu, nó hay nằm ngủ ngoài ban công",
+         "cao"),
+        ("Trí tuệ nhân tạo đang phát triển mạnh mẽ và nhanh chóng, ảnh hưởng đến nhiều lĩnh vực",
+         "AI đang phát triển rất nhanh và mạnh mẽ, làm thay đổi sâu sắc mọi ngành nghề",
+         "cao"),
+        ("Anh ấy rất thích uống cà phê đen nóng vào mỗi buổi sáng trước khi đi làm",
+         "Cà phê đen là thức uống yêu thích của tôi mỗi buổi sáng khi thức dậy",
+         "cao"),
+        # --- Cặp tương tự thấp (khác chủ đề, không dùng chung từ nội dung) ---
+        ("Tôi thường đi học bằng xe đạp đến trường vào mỗi buổi sáng sớm",
+         "Món phở bò nóng hổi này có hương vị thơm ngon và nước dùng rất đậm đà",
+         "thấp"),
+        ("Bầu trời hôm nay trong xanh và rất đẹp, không một gợn mây",
+         "Chiếc máy tính xách tay mới của tôi có cấu hình mạnh và chạy rất mượt mà",
+         "thấp")
     ]
 
     try:
-        embedder = LocalEmbedder()
-        print("Sử dụng LocalEmbedder (sentence-transformers).")
+        embedder = OpenAIEmbedder()
+        print("Sử dụng OpenAIEmbedder.")
     except Exception as e:
-        print(f"Không thể load LocalEmbedder: {e}")
+        print(f"Không thể load OpenAIEmbedder: {e}")
         print("Sử dụng MockEmbedder (kết quả sẽ mang tính ngẫu nhiên do hash).")
         embedder = MockEmbedder()
 
@@ -48,9 +64,9 @@ def evaluate_part_5():
     print("="*50)
     print("Mô phỏng 5 câu hỏi truy xuất với một kho tài liệu mẫu.")
     
-    # Tạo store với MockEmbedder (hoặc LocalEmbedder nếu có)
+    # Tạo store với MockEmbedder (hoặc OpenAIEmbedder nếu có)
     try:
-        embedder = LocalEmbedder()
+        embedder = OpenAIEmbedder()
     except Exception:
         embedder = MockEmbedder()
 

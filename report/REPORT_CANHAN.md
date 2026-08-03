@@ -154,15 +154,15 @@ tests/test_solution.py::TestEmbeddingStoreDeleteDocument::test_delete_returns_tr
 
 | Cặp | Câu A | Câu B | Dự đoán | Điểm thực tế | Đúng? |
 |------|-----------|-----------|---------|--------------|-------|
-| 1 | "Mèo là động vật dễ thương" | "Con mèo này rất đáng yêu" | cao | 0.6020 | Đúng |
-| 2 | "Tôi đi học bằng xe đạp" | "Trời hôm nay rất đẹp" | thấp | 0.3145 | Đúng |
-| 3 | "Trí tuệ nhân tạo phát triển mạnh" | "AI đang thay đổi thế giới" | cao | 0.4334 | Đúng |
-| 4 | "Anh ấy thích uống cà phê đen" | "Cà phê sữa là món tôi thích" | cao | 0.6139 | Đúng |
-| 5 | "Bầu trời màu xanh dương" | "Cỏ cây có màu xanh lá" | thấp | 0.5723 | Sai |
+| 1 | "Con mèo nhà em rất dễ thương và đáng yêu, nó thường cuộn tròn ngủ trên ghế sofa" | "Chú mèo trắng này trông thật dễ thương và đáng yêu, nó hay nằm ngủ ngoài ban công" | cao | 0.6388 | Đúng |
+| 2 | "Trí tuệ nhân tạo đang phát triển mạnh mẽ và nhanh chóng, ảnh hưởng đến nhiều lĩnh vực" | "AI đang phát triển rất nhanh và mạnh mẽ, làm thay đổi sâu sắc mọi ngành nghề" | cao | 0.5970 | Đúng |
+| 3 | "Anh ấy rất thích uống cà phê đen nóng vào mỗi buổi sáng trước khi đi làm" | "Cà phê đen là thức uống yêu thích của tôi mỗi buổi sáng khi thức dậy" | cao | 0.7570 | Đúng |
+| 4 | "Tôi thường đi học bằng xe đạp đến trường vào mỗi buổi sáng sớm" | "Món phở bò nóng hổi này có hương vị thơm ngon và nước dùng rất đậm đà" | thấp | 0.2249 | Đúng |
+| 5 | "Bầu trời hôm nay trong xanh và rất đẹp, không một gợn mây" | "Chiếc máy tính xách tay mới của tôi có cấu hình mạnh và chạy rất mượt mà" | thấp | 0.2829 | Đúng |
 
 **Kết quả nào bất ngờ nhất? Điều này nói gì về cách embeddings biểu diễn ý nghĩa?**
 
-> *Viết 2-3 câu:* Kết quả bất ngờ nhất có thể là khi hai câu sử dụng từ vựng hoàn toàn khác nhau nhưng mô hình vẫn cho điểm tương tự cao (như "Trí tuệ nhân tạo" và "AI"). Điều này cho thấy embeddings thực sự bắt được ý nghĩa ngữ nghĩa tiềm ẩn (semantic meaning) chứ không chỉ đơn thuần là so khớp từ khóa (keyword matching).
+> *Viết 2-3 câu:* Cả 5 cặp đều đúng dự đoán, với sự phân tách rõ rệt giữa hai nhóm: các cặp "cao" đạt 0.60–0.76 còn các cặp "thấp" chỉ quanh 0.22–0.28. Điểm đáng chú ý nhất là cặp 2 — hai câu diễn đạt cùng một ý bằng hình thức từ khác nhau hoàn toàn ("Trí tuệ nhân tạo" ↔ "AI", vị ngữ cũng không trùng nguyên văn) nhưng vẫn đạt 0.5970. Điều này cho thấy embeddings thực sự bắt được ý nghĩa ngữ nghĩa tiềm ẩn (semantic meaning) chứ không chỉ đơn thuần là so khớp từ khóa (keyword matching).
 
 ---
 

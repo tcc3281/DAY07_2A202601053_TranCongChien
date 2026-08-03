@@ -1,0 +1,11 @@
+[project]
+name = "day07-2a202601053-trancongchien"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "openai>=2.52.0",
+    "pytest==9.1.1",
+    "python-dotenv==1.2.2",
+]
